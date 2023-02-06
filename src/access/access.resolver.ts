@@ -19,7 +19,7 @@ export class AccessResolver {
   }
 
   @Query(() => Access, { name: 'access' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('id', { type: () => String }) id: string) {
     return this.accessService.findOne(id);
   }
 
@@ -29,7 +29,7 @@ export class AccessResolver {
   }
 
   @Mutation(() => Access)
-  removeAccess(@Args('id', { type: () => Int }) id: number) {
+  removeAccess(@Args('id', { type: () => String }) id: string) {
     return this.accessService.remove(id);
   }
 }

@@ -19,7 +19,7 @@ export class ResponsabilityResolver {
   }
 
   @Query(() => Responsability, { name: 'responsability' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('id', { type: () => Int }) id: string) {
     return this.responsabilityService.findOne(id);
   }
 
@@ -29,7 +29,8 @@ export class ResponsabilityResolver {
   }
 
   @Mutation(() => Responsability)
-  removeResponsability(@Args('id', { type: () => Int }) id: number) {
+  removeResponsability(@Args('id', { type: () => Int }) id: string) {
     return this.responsabilityService.remove(id);
   }
+
 }

@@ -12,15 +12,15 @@ export class ResponsabilityService {
     return `This action returns all responsability`;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} responsability`;
   }
 
-  update(id: number, updateResponsabilityInput: UpdateResponsabilityInput) {
+  update(id: string, updateResponsabilityInput: UpdateResponsabilityInput) {
     return `This action updates a #${id} responsability`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} responsability`;
   }
 }

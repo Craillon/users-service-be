@@ -12,15 +12,15 @@ export class AccessService {
     return `This action returns all access`;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} access`;
   }
 
-  update(id: number, updateAccessInput: UpdateAccessInput) {
+  update(id: string, updateAccessInput: UpdateAccessInput) {
     return `This action updates a #${id} access`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} access`;
   }
 }

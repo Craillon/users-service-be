@@ -2,37 +2,65 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-type Role {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-type Access {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 type Attribution {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  stopedDate: String!
+  user: User!
 }
 
 type Responsability {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  libelle: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  access: [Access!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Access {
+  role: Role!
+  responsability: Responsability!
+}
+
+type Role {
+  name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  access: [Access!]!
+  user: [User!]!
+}
+
+type User {
+  firstName: String!
+  lastName: String!
+  birthDay: String!
+  fixePhone: String
+  phone: String
+  mail: String
+  address: String!
+  district: String!
+  city: String!
+  contry: String!
+  username: String!
+  password: String!
+  token: String!
+  status: String!
+  structureID: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime!
+  attribution: [Attribution!]!
+  role: User!
 }
 
 type Query {
   users: [User!]!
   user(id: Int!): User!
-  roles: [Role!]!
-  role(id: Int!): Role!
-  access(id: Int!): Access!
+  getRoles: [Role!]
+  getRole(id: Int!): Role
+  access(id: String!): Access!
   attribution(id: Int!): Attribution!
   responsability(id: Int!): Responsability!
 }
@@ -41,12 +69,12 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
-  createRole(createRoleInput: CreateRoleInput!): Role!
+  createRole(createRoleInput: CreateRoleInput!): Role
   updateRole(updateRoleInput: UpdateRoleInput!): Role!
   removeRole(id: Int!): Role!
   createAccess(createAccessInput: CreateAccessInput!): Access!
   updateAccess(updateAccessInput: UpdateAccessInput!): Access!
-  removeAccess(id: Int!): Access!
+  removeAccess(id: String!): Access!
   createAttribution(createAttributionInput: CreateAttributionInput!): Attribution!
   updateAttribution(updateAttributionInput: UpdateAttributionInput!): Attribution!
   removeAttribution(id: Int!): Attribution!
@@ -67,45 +95,37 @@ input UpdateUserInput {
 }
 
 input CreateRoleInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  name: String!
 }
 
 input UpdateRoleInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  name: String
   id: Int!
 }
 
 input CreateAccessInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  libelle: String!
 }
 
 input UpdateAccessInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  libelle: String
+  id: String!
 }
 
 input CreateAttributionInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  stopedDate: String!
 }
 
 input UpdateAttributionInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  stopedDate: String
   id: Int!
 }
 
 input CreateResponsabilityInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  libelle: String!
 }
 
 input UpdateResponsabilityInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  libelle: String
+  id: String!
 }

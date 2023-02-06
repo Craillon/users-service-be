@@ -8,17 +8,17 @@ import { UpdateRoleInput } from './dto/update-role.input';
 export class RolesResolver {
   constructor(private readonly rolesService: RolesService) {}
 
-  @Mutation(() => Role)
+  @Mutation(() => Role, { name: 'createRole', nullable: true })
   createRole(@Args('createRoleInput') createRoleInput: CreateRoleInput) {
     return this.rolesService.create(createRoleInput);
   }
 
-  @Query(() => [Role], { name: 'roles' })
+  @Query(() => [Role], { name: 'getRoles', nullable: true })
   findAll() {
     return this.rolesService.findAll();
   }
 
-  @Query(() => Role, { name: 'role' })
+  @Query(() => Role, { name: 'getRole', nullable: true })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.rolesService.findOne(id);
   }
