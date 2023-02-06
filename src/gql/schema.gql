@@ -1,0 +1,111 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Role {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Access {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Attribution {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Responsability {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User!
+  roles: [Role!]!
+  role(id: Int!): Role!
+  access(id: Int!): Access!
+  attribution(id: Int!): Attribution!
+  responsability(id: Int!): Responsability!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  createRole(createRoleInput: CreateRoleInput!): Role!
+  updateRole(updateRoleInput: UpdateRoleInput!): Role!
+  removeRole(id: Int!): Role!
+  createAccess(createAccessInput: CreateAccessInput!): Access!
+  updateAccess(updateAccessInput: UpdateAccessInput!): Access!
+  removeAccess(id: Int!): Access!
+  createAttribution(createAttributionInput: CreateAttributionInput!): Attribution!
+  updateAttribution(updateAttributionInput: UpdateAttributionInput!): Attribution!
+  removeAttribution(id: Int!): Attribution!
+  createResponsability(createResponsabilityInput: CreateResponsabilityInput!): Responsability!
+  updateResponsability(updateResponsabilityInput: UpdateResponsabilityInput!): Responsability!
+  removeResponsability(id: Int!): Responsability!
+}
+
+input CreateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateRoleInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateRoleInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateAccessInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateAccessInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateAttributionInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateAttributionInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateResponsabilityInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateResponsabilityInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
