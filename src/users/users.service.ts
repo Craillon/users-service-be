@@ -1,26 +1,50 @@
-import { Injectable } from '@nestjs/common';
+import { GoneException, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { Repository } from 'typeorm';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-  create(createUserInput: CreateUserInput) {
-    return 'This action adds a new user';
+  constructor(
+    @InjectRepository(User) private readonly userRepo : Repository<User>
+  ){}
+  async create(createUserInput: CreateUserInput) {
+    const found = await this.userRepo.findOneBy({
+      firstName: createUserInput.firstName,
+      lastName: createUserInput.lastName,
+      structureID: createUserInput.structureID
+    })
+    if (found.status == "deactivated") {
+      throw new GoneException("deactivated");
+    }else if (found.status == "banished"){
+      throw new GoneException("banished");
+    }else if (found.status == "activated"){
+      throw new GoneException("activated");
+    }else {
+      const newUser = this.userRepo.create(createUserInput)
+      return await this.userRepo.save(createUserInput);
+    }
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll() {
+    return await this.userRepo.find({where: {role: {access: {responsability: true}}, attribution: true}});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string) {
+    const found = await this.userRepo.findOne({where: {role: {access: {responsability: true}}, attribution: true}});
+    return found ? found : null;
   }
 
-  update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserInput: UpdateUserInput) {
+    const found = await this.findOne(id)
+    const preload = await this.userRepo.preload(updateUserInput)
+    return found ? await this.userRepo.save(preload) : null;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    const found = await this.findOne(id)
+    return found ? await this.userRepo.remove(found) : null;
   }
 }

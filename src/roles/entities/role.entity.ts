@@ -6,6 +6,7 @@ import { Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Ent
 @Entity()
 @ObjectType()
 export class Role {
+  @Field()
   @PrimaryGeneratedColumn('increment')
   _id: number;
 

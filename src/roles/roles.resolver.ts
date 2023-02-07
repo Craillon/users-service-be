@@ -23,12 +23,12 @@ export class RolesResolver {
     return this.rolesService.findOne(id);
   }
 
-  @Mutation(() => Role)
+  @Mutation(() => Role, { name: 'updateRole', nullable: true })
   updateRole(@Args('updateRoleInput') updateRoleInput: UpdateRoleInput) {
     return this.rolesService.update(updateRoleInput.id, updateRoleInput);
   }
 
-  @Mutation(() => Role)
+  @Mutation(() => Role, { name: 'deleteRole', nullable: true })
   removeRole(@Args('id', { type: () => Int }) id: number) {
     return this.rolesService.remove(id);
   }

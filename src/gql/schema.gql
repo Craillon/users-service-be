@@ -25,6 +25,7 @@ type Access {
 }
 
 type Role {
+  _id: Float!
   name: String!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -70,8 +71,8 @@ type Mutation {
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
   createRole(createRoleInput: CreateRoleInput!): Role
-  updateRole(updateRoleInput: UpdateRoleInput!): Role!
-  removeRole(id: Int!): Role!
+  updateRole(updateRoleInput: UpdateRoleInput!): Role
+  deleteRole(id: Int!): Role
   createAccess(createAccessInput: CreateAccessInput!): Access!
   updateAccess(updateAccessInput: UpdateAccessInput!): Access!
   removeAccess(id: String!): Access!

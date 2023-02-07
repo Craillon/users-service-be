@@ -29,11 +29,12 @@ export class RolesService {
 
   async update(id: number, updateRoleInput: UpdateRoleInput) {
     const roleFounded = await this.roleRepo.findOneBy({_id: id})
-    
-    return `This action updates a #${id} role`;
+    const preloading = await this.roleRepo.preload({ _id: id, name: updateRoleInput.name })
+    return roleFounded ? await this.roleRepo.save(preloading) : null;
   }
 
   async remove(id: number) {
-    return `This action removes a #${id} role`;
+    const found = await this.findOne(id)
+    return found ? await this.roleRepo.remove(found) : null;
   }
 }

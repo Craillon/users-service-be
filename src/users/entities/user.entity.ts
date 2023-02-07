@@ -12,6 +12,10 @@ export class User {
   _id: string;
 
   @Field()
+  @Column({nullable: true, default: null})
+  profile: string
+
+  @Field()
   @Column({nullable: false})
   firstName: string
 
@@ -63,11 +67,11 @@ export class User {
   @Column({nullable: false})
   token: string
 
-  @Field()
-  @Column({nullable: false})
+  @Field({nullable: true, defaultValue: "deactivated"})
+  @Column({nullable: true, default: "deactivated"})
   status: string
 
-  @Field()
+  @Field({nullable: true, defaultValue: null})
   @Column({nullable: true, default: null})
   structureID: string
 
