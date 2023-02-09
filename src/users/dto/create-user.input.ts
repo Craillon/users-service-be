@@ -15,12 +15,6 @@ export class CreateUserInput {
   password: string;
 
   @Field()
-  token: string;
-
-  @Field()
-  status: string;
-
-  @Field()
   birthDay: string;
 
   @Field()
@@ -32,7 +26,7 @@ export class CreateUserInput {
   @Field()
   phone: string;
 
-  @Field()
+  @Field({nullable: true, defaultValue: null})
   fixePhone: string;
 
   @Field()
@@ -44,10 +38,10 @@ export class CreateUserInput {
   @Field()
   contry: string;
 
-  @Field()
-  roleID: string;
+  // @Field({nullable: true, defaultValue: null})
+  // roleID: string;
 
-  @Field()
-  structureID: string;
+  // @Field({nullable: true, defaultValue: null})
+  // structureID: string;
 
 }

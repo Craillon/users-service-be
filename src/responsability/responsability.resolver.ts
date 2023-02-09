@@ -8,28 +8,28 @@ import { UpdateResponsabilityInput } from './dto/update-responsability.input';
 export class ResponsabilityResolver {
   constructor(private readonly responsabilityService: ResponsabilityService) {}
 
-  @Mutation(() => Responsability)
+  @Mutation(() => Responsability, { name: 'createResponsability', nullable: true })
   createResponsability(@Args('createResponsabilityInput') createResponsabilityInput: CreateResponsabilityInput) {
     return this.responsabilityService.create(createResponsabilityInput);
   }
 
-  @Query(() => [Responsability], { name: 'responsability' })
+  @Query(() => [Responsability], { name: 'getResponsabilities', nullable: true })
   findAll() {
     return this.responsabilityService.findAll();
   }
 
-  @Query(() => Responsability, { name: 'responsability' })
-  findOne(@Args('id', { type: () => Int }) id: string) {
+  @Query(() => Responsability, { name: 'getResponsability', nullable: true })
+  findOne(@Args('id', { type: () => String }) id: string) {
     return this.responsabilityService.findOne(id);
   }
 
-  @Mutation(() => Responsability)
+  @Mutation(() => Responsability, { name: 'updateResponsability', nullable: true })
   updateResponsability(@Args('updateResponsabilityInput') updateResponsabilityInput: UpdateResponsabilityInput) {
     return this.responsabilityService.update(updateResponsabilityInput.id, updateResponsabilityInput);
   }
 
-  @Mutation(() => Responsability)
-  removeResponsability(@Args('id', { type: () => Int }) id: string) {
+  @Mutation(() => Responsability, { name: 'deleteResponsability', nullable: true })
+  removeResponsability(@Args('id', { type: () => String }) id: string) {
     return this.responsabilityService.remove(id);
   }
 

@@ -2,28 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Attribution {
-  stopedDate: String!
-  user: User!
-}
-
-type Responsability {
-  libelle: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  access: [Access!]!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-type Access {
-  role: Role!
-  responsability: Responsability!
-}
-
 type Role {
   _id: Float!
   name: String!
@@ -33,7 +11,39 @@ type Role {
   user: [User!]!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Access {
+  _id: String!
+  libelle: String!
+  createdAt: String!
+  updatedAt: String!
+  role: Role!
+  responsability: Responsability!
+}
+
+type Responsability {
+  _id: String!
+  libelle: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  access: [Access!]!
+  attribution: [Attribution!]!
+}
+
+type Attribution {
+  _id: Float!
+  stopedDate: String!
+  user: User!
+  respo: Responsability!
+}
+
 type User {
+  _id: String!
+  profile: String!
   firstName: String!
   lastName: String!
   birthDay: String!
@@ -46,53 +56,94 @@ type User {
   contry: String!
   username: String!
   password: String!
-  token: String!
-  status: String!
-  structureID: String!
+  token: String
+  status: String
+  structureID: String
   createdAt: DateTime!
   updatedAt: DateTime!
   deletedAt: DateTime!
   attribution: [Attribution!]!
-  role: User!
+  role: Role
 }
 
 type Query {
-  users: [User!]!
-  user(id: Int!): User!
+  getUsers: [User!]
+  getUser(id: String!): User
   getRoles: [Role!]
   getRole(id: Int!): Role
-  access(id: String!): Access!
-  attribution(id: Int!): Attribution!
-  responsability(id: Int!): Responsability!
+  allAccess: [Access!]
+  getAccess(id: String!): Access
+  getResponsabilities: [Responsability!]
+  getResponsability(id: String!): Responsability
+  getAttributions: [Attribution!]
+  getAttribution(id: Int!): Attribution
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: Int!): User!
+  createUser(createUserInput: CreateUserInput!): User
+  updateUser(updateUserInput: UpdateUserInput!): User
+  updatePassword(updatePasswordInput: Password!): User
+  deleteUser(id: String!): User
   createRole(createRoleInput: CreateRoleInput!): Role
   updateRole(updateRoleInput: UpdateRoleInput!): Role
   deleteRole(id: Int!): Role
-  createAccess(createAccessInput: CreateAccessInput!): Access!
-  updateAccess(updateAccessInput: UpdateAccessInput!): Access!
-  removeAccess(id: String!): Access!
-  createAttribution(createAttributionInput: CreateAttributionInput!): Attribution!
-  updateAttribution(updateAttributionInput: UpdateAttributionInput!): Attribution!
-  removeAttribution(id: Int!): Attribution!
-  createResponsability(createResponsabilityInput: CreateResponsabilityInput!): Responsability!
-  updateResponsability(updateResponsabilityInput: UpdateResponsabilityInput!): Responsability!
-  removeResponsability(id: Int!): Responsability!
+  createAccess(createAccessInput: CreateAccessInput!): Access
+  updateAccess(updateAccessInput: UpdateAccessInput!): Access
+  removeAccess(id: String!): Access
+  createResponsability(createResponsabilityInput: CreateResponsabilityInput!): Responsability
+  updateResponsability(updateResponsabilityInput: UpdateResponsabilityInput!): Responsability
+  deleteResponsability(id: String!): Responsability
+  createAttribution(createAttributionInput: CreateAttributionInput!): Attribution
+  updateAttribution(updateAttributionInput: UpdateAttributionInput!): Attribution
+  removeAttribution(id: Int!): Attribution
 }
 
 input CreateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  firstName: String!
+  lastName: String!
+  username: String!
+  password: String!
+  birthDay: String!
+  address: String!
+  mail: String!
+  phone: String!
+  fixePhone: String = null
+  city: String!
+  district: String!
+  contry: String!
 }
 
 input UpdateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  firstName: String
+  lastName: String
+  username: String
+  password: String
+  birthDay: String
+  address: String
+  mail: String
+  phone: String
+  fixePhone: String = null
+  city: String
+  district: String
+  contry: String
+  id: String!
+}
+
+input Password {
+  firstName: String
+  lastName: String
+  username: String
+  password: String
+  birthDay: String
+  address: String
+  mail: String
+  phone: String
+  fixePhone: String = null
+  city: String
+  district: String
+  contry: String
+  Password: String!
+  id: String!
 }
 
 input CreateRoleInput {
@@ -106,20 +157,15 @@ input UpdateRoleInput {
 
 input CreateAccessInput {
   libelle: String!
+  roleID: Float!
+  respoID: String!
 }
 
 input UpdateAccessInput {
   libelle: String
+  roleID: Float
+  respoID: String
   id: String!
-}
-
-input CreateAttributionInput {
-  stopedDate: String!
-}
-
-input UpdateAttributionInput {
-  stopedDate: String
-  id: Int!
 }
 
 input CreateResponsabilityInput {
@@ -129,4 +175,17 @@ input CreateResponsabilityInput {
 input UpdateResponsabilityInput {
   libelle: String
   id: String!
+}
+
+input CreateAttributionInput {
+  stopedDate: String!
+  userID: String!
+  responsID: String!
+}
+
+input UpdateAttributionInput {
+  stopedDate: String
+  userID: String
+  responsID: String
+  id: Int!
 }

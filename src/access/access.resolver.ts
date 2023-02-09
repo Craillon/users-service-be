@@ -8,27 +8,27 @@ import { UpdateAccessInput } from './dto/update-access.input';
 export class AccessResolver {
   constructor(private readonly accessService: AccessService) {}
 
-  @Mutation(() => Access)
+  @Mutation(() => Access, { name: 'createAccess', nullable: true  })
   createAccess(@Args('createAccessInput') createAccessInput: CreateAccessInput) {
     return this.accessService.create(createAccessInput);
   }
 
-  @Query(() => [Access], { name: 'access' })
+  @Query(() => [Access], { name: 'allAccess', nullable: true })
   findAll() {
     return this.accessService.findAll();
   }
 
-  @Query(() => Access, { name: 'access' })
+  @Query(() => Access, { name: 'getAccess', nullable: true  })
   findOne(@Args('id', { type: () => String }) id: string) {
     return this.accessService.findOne(id);
   }
 
-  @Mutation(() => Access)
+  @Mutation(() => Access, { name: 'updateAccess', nullable: true  })
   updateAccess(@Args('updateAccessInput') updateAccessInput: UpdateAccessInput) {
     return this.accessService.update(updateAccessInput.id, updateAccessInput);
   }
 
-  @Mutation(() => Access)
+  @Mutation(() => Access, { name: 'removeAccess', nullable: true  })
   removeAccess(@Args('id', { type: () => String }) id: string) {
     return this.accessService.remove(id);
   }

@@ -3,32 +3,38 @@ import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { Password } from './dto/password-reset.input';
 
 @Resolver(() => User)
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
-  @Mutation(() => User)
+  @Mutation(() => User, { name: 'createUser', nullable: true })
   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
     return this.usersService.create(createUserInput);
   }
 
-  @Query(() => [User], { name: 'users' })
+  @Query(() => [User], { name: 'getUsers', nullable: true })
   findAll() {
     return this.usersService.findAll();
   }
 
-  @Query(() => User, { name: 'user' })
+  @Query(() => User, { name: 'getUser', nullable: true })
   findOne(@Args('id', { type: () => String }) id: string) {
     return this.usersService.findOne(id);
   }
 
-  @Mutation(() => User)
+  @Mutation(() => User, { name: 'updateUser', nullable: true })
   updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
     return this.usersService.update(updateUserInput.id, updateUserInput);
   }
 
-  @Mutation(() => User)
+  @Mutation(() => User, { name: 'updatePassword', nullable: true })
+  updatePassword(@Args('updatePasswordInput') updatePasswordInput: Password) {
+    return this.usersService.update(updatePasswordInput.id, updatePasswordInput);
+  }
+
+  @Mutation(() => User, { name: 'deleteUser', nullable: true })
   removeUser(@Args('id', { type: () => String }) id: string) {
     return this.usersService.remove(id);
   }

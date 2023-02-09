@@ -8,7 +8,8 @@ import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGenerate
 @Entity()
 @ObjectType()
 export class User {
-  @PrimaryGeneratedColumn()
+  @Field()
+  @PrimaryGeneratedColumn("uuid")
   _id: string;
 
   @Field()
@@ -63,8 +64,8 @@ export class User {
   @Column({nullable: false})
   password: string
 
-  @Field()
-  @Column({nullable: false})
+  @Field({nullable: true, defaultValue: null})
+  @Column({nullable: true, default: null})
   token: string
 
   @Field({nullable: true, defaultValue: "deactivated"})
@@ -93,7 +94,7 @@ export class User {
   attribution: Attribution[]
 
   // ROLE - FOREIGN KEY
-  @Field( type => User)
+  @Field( type => Role, {nullable: true, defaultValue: null})
   @ManyToOne(type => Role, role => role.user)
   role: Role
 

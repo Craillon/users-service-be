@@ -23,7 +23,7 @@ export class RolesService {
   }
 
   async findOne(id: number) {
-    const found = await this.roleRepo.findOne({where: {user: true}})
+    const found = await this.roleRepo.findOne({where: {_id: id}, relations: {user: true}})
     return found ? found : null;
   }
 

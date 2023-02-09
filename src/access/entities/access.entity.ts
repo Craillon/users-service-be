@@ -6,15 +6,19 @@ import { Responsability } from '../../responsability/entities/responsability.ent
 @Entity()
 @ObjectType()
 export class Access {
+  @Field()
   @PrimaryGeneratedColumn()
   _id: string;
 
+  @Field()
   @Column()
   libelle: string
 
+  @Field()
   @CreateDateColumn()
   createdAt: string
 
+  @Field()
   @UpdateDateColumn()
   updatedAt: string
 
